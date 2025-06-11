@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Contatos</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="tarefas.html">Tarefas</a>
+<a href="kanban.html">Oportunidades</a>
+</nav>
+<div class="container">
+<h2>Novo Contato</h2>
+<form action="php/contatos.php" method="POST">
+<input type="hidden" name="action" value="create">
+<input type="text" name="name" placeholder="Nome" required>
+<input type="email" name="email" placeholder="Email">
+<input type="text" name="phone" placeholder="Telefone">
+<input type="text" name="company" placeholder="Empresa">
+<textarea name="notes" placeholder="Notas"></textarea>
+<button type="submit">Salvar</button>
+</form>
+<h2>Meus Contatos</h2>
+<div id="lista-contatos"></div>
+</div>
+<script>
+fetch('php/contatos.php')
+.then(r=>r.json())
+.then(data=>{
+ const list=document.getElementById('lista-contatos');
+ list.innerHTML=data.map(c=>`<p>${c.name} - ${c.email}</p>`).join('');
+});
+</script>
+</body>
+</html>

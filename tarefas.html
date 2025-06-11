@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tarefas</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="contatos.html">Contatos</a>
+<a href="kanban.html">Oportunidades</a>
+</nav>
+<div class="container">
+<h2>Nova Tarefa</h2>
+<form action="php/tarefas.php" method="POST">
+<input type="hidden" name="action" value="create">
+<input type="text" name="title" placeholder="Título" required>
+<textarea name="description" placeholder="Descrição"></textarea>
+<input type="date" name="dueDate">
+<button type="submit">Salvar</button>
+</form>
+<h2>Minhas Tarefas</h2>
+<div id="lista-tarefas"></div>
+</div>
+<script>
+fetch('php/tarefas.php')
+.then(r=>r.json())
+.then(data=>{
+ const list=document.getElementById('lista-tarefas');
+ list.innerHTML=data.map(t=>`<p>${t.title} - ${t.completed ? 'Concluída':'Pendente'}</p>`).join('');
+});
+</script>
+</body>
+</html>
