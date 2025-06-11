@@ -1,0 +1,31 @@
+* { box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  background: url('https://source.unsplash.com/1600x900/?nature') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+  color: #000;
+}
+input, button, textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 5px;
+}
+nav a { margin: 0 10px; color: #fff; text-decoration: none; }
+.kanban { display: flex; gap: 10px; }
+.column { flex: 1; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px; min-height: 200px; }
+.card { background: rgba(255,255,255,0.6); margin:5px; padding:5px; border-radius:5px; cursor: grab; }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Oportunidades</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="contatos.html">Contatos</a>
+<a href="tarefas.html">Tarefas</a>
+</nav>
+<div class="kanban">
+<div class="column" data-stage="Novo">
+<h3>Novo</h3>
+</div>
+<div class="column" data-stage="Em Progresso">
+<h3>Em Progresso</h3>
+</div>
+<div class="column" data-stage="Ganho">
+<h3>Ganho</h3>
+</div>
+<div class="column" data-stage="Perdido">
+<h3>Perdido</h3>
+</div>
+</div>
+<script src="js/kanban.js"></script>
+<script>
+fetch('php/oportunidades.php')
+.then(r=>r.json())
+.then(data=>{
+ data.forEach(o=>{
+  const card=document.createElement('div');
+  card.className='card';
+  card.draggable=true;
+  card.dataset.id=o.id;
+  card.textContent=o.title;
+  document.querySelector(`[data-stage="${o.stage}"]`).appendChild(card);
+ });
+});
+</script>
+</body>
+</html>
