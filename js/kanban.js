@@ -1,20 +1,23 @@
-const draggables = document.querySelectorAll('.card');
-const columns = document.querySelectorAll('.column');
-
-draggables.forEach(card => {
+function makeDraggable(card){
   card.addEventListener('dragstart', () => card.classList.add('dragging'));
   card.addEventListener('dragend', () => {
     card.classList.remove('dragging');
     save(card);
   });
-});
+}
 
-columns.forEach(column => {
-  column.addEventListener('dragover', e => {
-    e.preventDefault();
-    const dragging = document.querySelector('.dragging');
+function initDrag(){
+  document.querySelectorAll('.card').forEach(makeDraggable);
+}
+
+document.addEventListener('dragover', e => {
+  const column = e.target.closest('.column');
+  if(!column) return;
+  e.preventDefault();
+  const dragging = document.querySelector('.dragging');
+  if(dragging && column!==dragging.parentElement){
     column.appendChild(dragging);
-  });
+  }
 });
 
 function save(card){

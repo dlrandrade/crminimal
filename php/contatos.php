@@ -2,6 +2,11 @@
 require 'db.php';
 $user = $_SESSION['user_id'] ?? 0;
 
+if (!$user) {
+    echo json_encode([]);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['action'] === 'create') {
         $stmt = $pdo->prepare('INSERT INTO Contact (name,email,phone,company,notes,userId) VALUES (?,?,?,?,?,?)');
